@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h2>You are currently standing at... </h2>
+
+<!-- my loc will be definied in the model, as the combinatin of address and city -->
+<p>
+	<%= @location.my_location %>
+</p>
+
+<h2>The closest buses are...</h2>
+
+<% if @bus_count == 0 %>
+<p>
+	...not really that close.  It may be best to use Uber.
+</p>
+<%end%>
+
+<% @nearby_buses.each do |bus|
+	 %>
+	 <p>
+<strong>Route</strong>: <%= bus ["ROUTE"] %> <BR />
+<strong>Vehicle #</strong>: <%= bus ["VEHICLE"] %> <BR />
+<strong>Next stop</strong>: <%= bus ["TIMEPOINT"] %> <BR />
+</P>
+<%end%>
+
+<%= link_to "Actually, I'm at...", edit_location_path(@location) %>
